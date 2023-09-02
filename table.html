@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid Example</title>
+    <link rel="stylesheet" href="table.css">
+</head>
+<body>
+    <h1>CSEF FINAL YEAR TIME_TABLE[2023]</h1>
+    
+    <div class="grid-container">
+        <div class="grid-item">1</div>
+        <div class="grid-item">2</div>
+        <div class="grid-item">COMPILER</div>
+        <div class="grid-item">4</div>
+        <div class="grid-item">5</div>
+        <div class="grid-item">6</div>
+        <div class="grid-item">PE6</div>
+        <div class="grid-item">PE4</div>
+        <div class="grid-item">9</div>
+        <div class="grid-item">10</div>
+        <div class="grid-item">11</div>
+        <div class="grid-item">COMPILER</div>
+        <div class="grid-item">DESIGN</div>
+        <div class="grid-item">FREE</div>
+        <div class="grid-item">15</div>
+        <div class="grid-item">16</div>
+        <div class="grid-item">17</div>
+        <div class="grid-item">PE5</div>
+        <div class="grid-item">PE4</div>
+        <div class="grid-item">PE4</div>
+        <div class="grid-item">21</div>
+        <div class="grid-item">22</div>
+        <div class="grid-item">23</div>
+        <div class="grid-item">24</div>
+        <div class="grid-item">25</div>
+        <div class="grid-item">26</div>
+        <div class="grid-item">27</div>
+        <div class="grid-item">COMPILER</div>
+        <div class="grid-item">PE5</div>
+        <div class="grid-item">30</div>
+        <div class="grid-item">CIR</div>
+        <div class="grid-item">CIR</div>
+        <div class="grid-item">CIR</div>
+        <div class="grid-item">FREE</div>
+        <div class="grid-item">35</div>
+        <div class="grid-item">36</div>
+        <div class="grid-item">PE4</div>
+        <div class="grid-item">38</div>
+        <div class="grid-item">PE6</div>
+        <div class="grid-item">PE6</div>
+        <div class="grid-item">41</div>
+        <div class="grid-item">42</div>
+        <div class="grid-item">43</div>
+        <div class="grid-item">44</div>
+        <div class="grid-item">PE6</div>
+        <div class="grid-item">46</div>
+        <div class="grid-item">47</div>
+        <div class="grid-item">PE5</div>
+        <div class="grid-item">PE5</div>
+        <div class="grid-item">50</div>
+    </div>
+
+    <script>
+         function findrow_column(day,h,m,s){
+            // sat sun exclude 
+            if (day > 5 || day == 0 ){
+                return 100;
+            }
+            if ((h == 8 && m < 50 )){
+                console.log("slot1");
+                return 1;
+            }
+            else if ((h == 8 && m >= 50) || (h==9 && m<40) ){
+                console.log("slot2");
+                return 2;
+            }
+            else if ((h==9 && m>= 40) || ( h == 10 && m < 30)){
+                console.log("slot3");
+                return 3;
+            }
+            else if ((h==10 && m >= 45)|| (h==11 && m <35)){
+                console.log("slot4");
+                return 4;
+            }
+            else if((h==11 && m>=35)||(h==12 && m <25)){
+                console.log("slot5");
+                return 5;
+            }
+            else if ((h==12 && m>=25) ||( h==1 && m<15)){
+                console.log("slot6");
+                return 6;
+            }
+            else if ((h==1 && m>=15)||(h==2 && m<5)){
+                console.log("slot7");
+                return 7;
+            }
+            else if((h==2 && m<55)){
+                console.log("slot8");
+                return 8;
+            }
+            else if ((h==2 && m >=55) ||(h==3 && m<45)){
+                console.log("slot9");
+                return 9;
+            }
+            else if ((h==3 && m>= 45)||(h==4 && m< 35)){
+                console.log("slot10");
+                return 10;
+            }
+            // time greater than 5
+            else{
+                return 100;
+            }
+
+        }
+        
+        function gettime(){
+            const currentime = new Date();
+            const days = currentime.getDay()
+            const hours = currentime.getHours();
+            const mins = currentime.getMinutes();
+            const seconds = currentime.getSeconds();
+            var slot = findrow_column(days,hours,mins,seconds);
+        
+            if (slot != 100){
+            var index = (days-1) * 10  + slot;
+        
+            const gridItem = document.querySelector('.grid-container > .grid-item:nth-child(' + index +')');
+            //console.log(gridItem);
+            if (gridItem){
+                gridItem.style.transition = 'backgroundColor 3s,transform 1.3s 2s';
+                gridItem.style.transform = 'rotate(360deg)';
+                gridItem.style.backgroundColor = 'red';
+            }
+            }
+            // jUSt for testing
+            else{
+            // var index =  5;
+            // const gridItem = document.querySelector('.grid-container > .grid-item:nth-child(' + index +')');
+            // //console.log(gridItem);
+            // if (gridItem){
+                
+            //     gridItem.style.transition = 'backgroundColor 2s,transform 1.3s 1s';
+            //     gridItem.style.transform = 'rotate(360deg)';
+            //     gridItem.style.backgroundColor = 'red';
+            // }
+            exit();
+
+            }
+
+        }
+        setInterval(gettime,1000);
+        //intial call
+        getttime();
+
+       
+    </script>
+</body>
+</html>
